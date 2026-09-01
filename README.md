@@ -3,6 +3,22 @@
 ## Project Overview
 This project is a software module designed for a multiplayer game to collect user statistics, track in-game progress, and facilitate feedback between players and the administration team. The system used to monitor base development, identify unoptimized gameplay stages, and ensure fair play among users.
 
+<div style="overflow-x: auto; padding: 10px 0;">
+   <img src="images/Stat.png" height="300" style="margin-right: 10px;" />
+</div>
+<table>
+    <tr>
+        <td><img src="images/DataBase.png" width="300"></td>
+        <td><img src="images/Table.png" width="300"></td>
+        <td><img src="images/Grafic.png" width="300"></td>
+        <td><img src="images/Interface1.png" width="300"></td>
+        <td><img src="images/Interface2.png" width="300"></td>
+        <td><img src="images/Interface3.png" width="300"></td>
+        <td><img src="images/Interface4.png" width="300"></td>
+        <td><img src="images/Interface5.png" width="300"></td>
+    </tr>
+</table>
+
 ## Architecture and Technologies
 The system is divided into four main components:
 * **Client Application:** Developed in Lua.
