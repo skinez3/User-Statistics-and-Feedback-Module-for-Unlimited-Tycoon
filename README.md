@@ -47,6 +47,9 @@ The system is divided into four main components:
 * Add new administrators via a dedicated form that includes duplicate name validation.
 * Remove administrators, immediately revoking their access to the admin panel.
 
+## Documentation
+For an in-depth look at the project architecture, please refer to the comprehensive explanatory note (in Russian): Coursework_1.pdf
+
 ## Database Structure
 The relational database consists of the following connected tables:
 * **Players**: Stores player nicknames and current in-game currency balances.
