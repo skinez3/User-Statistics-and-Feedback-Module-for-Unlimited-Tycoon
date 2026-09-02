@@ -1,0 +1,20 @@
+local rep = game:GetService("ReplicatedStorage")
+local Add = rep:WaitForChild("AddAdmin")
+local HttpService = game:GetService("HttpService")
+
+local function UpdateReview(player,name,phone,email)
+	local url = "http://YourServer:3000/addadmin" -- URL to the server
+	local response
+	local data
+	pcall(function()
+		-- sending a POST request with parameters
+		response = HttpService:PostAsync(url, HttpService:JSONEncode({
+			name = tostring(name),
+			phone = tostring(phone),
+			email = tostring(email),
+		}))
+		data = HttpService:JSONDecode(response)
+	end)
+end
+
+Add.OnServerEvent:Connect(UpdateReview)
