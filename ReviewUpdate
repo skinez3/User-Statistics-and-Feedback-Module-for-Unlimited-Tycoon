@@ -1,0 +1,19 @@
+local rep = game:GetService("ReplicatedStorage")
+local Up = rep:WaitForChild("UpdateReview")
+local HttpService = game:GetService("HttpService")
+
+local function UpdateReview(player,id,status)
+	local url = "http://YourServer:3000/changereview" -- URL to the server
+	local response
+	local data
+	pcall(function()
+		-- sending a POST request with parameters
+		response = HttpService:PostAsync(url, HttpService:JSONEncode({
+			id = tostring(id),
+			status = tostring(status)
+		}))
+		data = HttpService:JSONDecode(response)
+	end)
+end
+
+Up.OnServerEvent:Connect(UpdateReview)
