@@ -3,7 +3,7 @@ local CheckTools = rep:WaitForChild("CheckTools")
 local HttpService = game:GetService("HttpService")
 
 local function Finding(Admin,player)
-	local url = "http://DESKTOP-IHG97PO:3000/findtools" -- URL to the server
+	local url = "http://YourServer:3000/findtools" -- URL to the server
 	local response
 	local data
 	pcall(function()
