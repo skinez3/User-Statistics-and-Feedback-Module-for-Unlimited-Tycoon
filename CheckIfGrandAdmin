@@ -1,0 +1,15 @@
+local rep = game:GetService("ReplicatedStorage")
+local Find = rep:WaitForChild("CheckIfGrandAdmin")
+local HashLib = require(script.Parent.HashLib)
+
+local function Finding(player, password)
+	local hash = HashLib.sha256(password)
+	local realhash = "03845d1d968858a77b0df96cb0e0ef7d3c237e6a493706d3fde039e9581f8ead"
+	if hash == realhash then
+		return true
+	else
+		return false
+	end
+end
+
+Find.OnServerInvoke = Finding
