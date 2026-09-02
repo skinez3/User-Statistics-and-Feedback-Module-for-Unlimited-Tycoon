@@ -1,0 +1,21 @@
+-- Searches for admins in the database
+
+local rep = game:GetService("ReplicatedStorage")
+local Find = rep:WaitForChild("FindAdmins")
+local HttpService = game:GetService("HttpService")
+
+local function Finding(player, admin)
+	local url = "http://YourServer:3000/findadmins" -- URL to the server
+	local response
+	local data
+	pcall(function()
+		-- sending a POST request with parameters
+		response = HttpService:PostAsync(url, HttpService:JSONEncode({
+			name = tostring(admin)
+		}))
+		data = HttpService:JSONDecode(response)
+	end)
+	return data.result
+end
+
+Find.OnServerInvoke = Finding
