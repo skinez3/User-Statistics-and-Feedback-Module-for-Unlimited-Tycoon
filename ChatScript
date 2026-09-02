@@ -1,3 +1,5 @@
+-- finds reviews
+
 local rep = game:GetService("ReplicatedStorage")
 local Find = rep:WaitForChild("FindReview")
 local HttpService = game:GetService("HttpService")
