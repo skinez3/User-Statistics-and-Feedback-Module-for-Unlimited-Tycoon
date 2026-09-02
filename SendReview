@@ -1,0 +1,65 @@
+--[[
+	This server-side script processes incoming user reviews from the client.
+First, it retrieves a list of available administrators from the Node.js backend, and randomly assigns one of them to handle the new review. 
+It then generates JSON data containing information about the player's review (name, assigned administrator, content, rating, and default status) and sends it to the backend database via an HTTP POST request.
+--]]
+
+local rep = game:GetService("ReplicatedStorage")
+local Send = rep:WaitForChild("SendReview")
+local HttpService = game:GetService("HttpService")
+
+-- Fetches all admins from the backend and returns a randomly selected one
+function FindAdmin()
+	local url = "http://YourServer:3000/alladmins"
+	local response
+	local data
+	local admin = ""
+	local c = 0
+	
+	pcall(function()
+		-- Send POST request with an empty payload to retrieve admin list
+		response = HttpService:PostAsync(url, HttpService:JSONEncode({
+		}))
+		data = HttpService:JSONDecode(response)
+	end)
+	
+	-- Count the total number of available admins
+	for i, v in pairs(data.result) do
+		c += 1
+	end
+	
+	-- Select a random admin by index
+	local curr = math.random(c)
+	for i, v in pairs(data.result) do
+		if curr == i then
+			admin = v["admin_name"]
+		end
+	end
+	
+	return admin
+end
+
+-- Processes the submitted review and sends it to the backend
+function onClick(player, Comment, CurrentRate)
+	local admin = FindAdmin()
+	local status = "Unresolved"
+	
+	local url = "http://YourServer:3000/review"
+	local response
+	local data
+	
+	pcall(function()
+		-- Send POST request with the review parameters
+		response = HttpService:PostAsync(url, HttpService:JSONEncode({
+			name = tostring(player),
+			admin = tostring(admin),
+			content = tostring(Comment),
+			rate = CurrentRate,
+			status = tostring(status)
+		}))
+		data = HttpService:JSONDecode(response)
+	end)
+end
+
+-- Listen for the client event to trigger the review processing
+Send.OnServerEvent:Connect(onClick)
