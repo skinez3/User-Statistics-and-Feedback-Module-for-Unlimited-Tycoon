@@ -1,0 +1,19 @@
+local rep = game:GetService("ReplicatedStorage")
+local CheckBuildings = rep:WaitForChild("CheckBuildings")
+local HttpService = game:GetService("HttpService")
+
+local function Finding(Admin,player)
+	local url = "http://YourServer:3000/findbuildings" -- URL to the server
+	local response
+	local data
+	pcall(function()
+		-- sending a POST request with parameters
+		response = HttpService:PostAsync(url, HttpService:JSONEncode({
+			name = tostring(player)
+		}))
+		data = HttpService:JSONDecode(response)
+	end)
+	return data.result
+end
+
+CheckBuildings.OnServerInvoke = Finding
