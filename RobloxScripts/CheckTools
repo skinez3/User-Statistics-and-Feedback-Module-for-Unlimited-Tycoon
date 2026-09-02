@@ -1,0 +1,19 @@
+local rep = game:GetService("ReplicatedStorage")
+local CheckTools = rep:WaitForChild("CheckTools")
+local HttpService = game:GetService("HttpService")
+
+local function Finding(Admin,player)
+	local url = "http://DESKTOP-IHG97PO:3000/findtools" -- URL to the server
+	local response
+	local data
+	pcall(function()
+		-- sending a POST request with parameters
+		response = HttpService:PostAsync(url, HttpService:JSONEncode({
+			name = tostring(player)
+		}))
+		data = HttpService:JSONDecode(response)
+	end)
+	return data.result
+end
+
+CheckTools.OnServerInvoke = Finding
