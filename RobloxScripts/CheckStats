@@ -3,7 +3,7 @@ local CheckStats = rep:WaitForChild("CheckStats")
 local HttpService = game:GetService("HttpService")
 
 local function Finding(Admin,player)
-	local url = "http://DESKTOP-IHG97PO:3000/findstats" -- URL to the server
+	local url = "http://YourServer:3000/findstats" -- URL to the server
 	local response
 	local data
 	pcall(function()
