@@ -1,0 +1,18 @@
+local rep = game:GetService("ReplicatedStorage")
+local Del = rep:WaitForChild("DeleteAdmin")
+local HttpService = game:GetService("HttpService")
+
+local function UpdateReview(player,admin)
+	local url = "http://YourServer:3000/deleteadmin" -- URL to the server
+	local response
+	local data
+	pcall(function()
+		-- sending a POST request with parameters
+		response = HttpService:PostAsync(url, HttpService:JSONEncode({
+			name = tostring(admin)
+		}))
+		data = HttpService:JSONDecode(response)
+	end)
+end
+
+Del.OnServerEvent:Connect(UpdateReview)
