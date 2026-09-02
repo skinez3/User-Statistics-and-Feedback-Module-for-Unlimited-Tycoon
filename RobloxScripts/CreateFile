@@ -1,0 +1,17 @@
+-- Creates a file with statistics on the server
+
+local Button = script.Parent
+local HttpService = game:GetService("HttpService")
+
+function onClick()
+	local url = "http://YourServer:3000/createfile" -- URL to the server
+	local response
+	local data
+	pcall(function()
+		-- sending a POST request with parameters
+		response = HttpService:PostAsync(url, HttpService:JSONEncode({
+		}))
+	end)
+end
+
+Button.MouseButton1Click:Connect(onClick)
